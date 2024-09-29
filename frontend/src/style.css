@@ -1,0 +1,194 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+header {
+  background-color: #333;
+  color: white;
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+}
+
+header .info {
+  list-style-type: none; /* Fjern standard liste-styling */
+  display: flex;
+  gap: 1rem; /* Mellomrom mellom list items */
+}
+
+header .info li {
+  text-align: right;
+}
+
+.experience-section {
+  background-color: #eaeaea;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.experience-section h2 {
+  text-align: center;
+  color: black;
+}
+
+.experience-section .experience {
+  display: inline-block;
+  width: 45%;
+  padding: 1rem;
+  margin: 0.5rem;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  color: black;
+}
+
+.experience {
+  display: flex;
+}
+
+.createProjectForm {
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+  margin: 5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.createProjectForm form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.createProjectForm label {
+  font-weight: bold;
+}
+
+.createProjectForm input,
+.createProjectForm textarea {
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.createProjectForm input[type='date'] {
+  max-width: 8rem;
+}
+
+.createProjectForm button {
+  padding: 0.5rem;
+  background-color: bisque;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.createProjectForm button:hover {
+  background-color: burlywood;
+}
+
+.project-section {
+  margin: 1rem;
+}
+
+.project-section ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem; 
+  justify-content: space-evenly; 
+}
+
+.category-summary {
+  padding: 0 1rem 1.5rem 1rem;
+}
+
+.project-card {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  flex: 1 1 calc(45% - 20px); 
+  max-width: calc(45% - 20px); 
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem; 
+}
+
+.project-card h3 {
+  margin: 0;
+}
+
+.project-card p {
+  margin: 0.3rem 0;
+  color: #666;
+}
+
+
+.contactForm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 60%;
+  padding: 0.5rem;
+  border: 1px #666;
+}
+
+.contactForm label {
+  font-weight: bold;
+}
+
+.contactForm input,
+.contactForm textarea {
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.contactForm button {
+  padding: 0.5rem;
+  background-color: bisque;
+  color: black;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.contactForm button:hover {
+  background-color: burlywood;
+}
+
+.contact {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  background-color: white;
+  margin-top: 5rem;
+}
