@@ -1,8 +1,8 @@
 // hooks/useProjects.ts
 import { useState, useEffect } from 'react';
 import { ProjectType } from '../Type';
-import { getProjects, createProject, deleteProject } from '../services/api';
 import { projectSchema } from '../helpers/validate';
+import { createProject, deleteProject, getProjects } from '../services/api';
 
 export const useProjects = () => {
   const [projects, setProjects] = useState<ProjectType[]>([]);
