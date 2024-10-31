@@ -1,10 +1,14 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { HTTPException } from "hono/http-exception";
-import { title } from "process";
-import { getUser } from "./utils/auth";
+import { authenticate } from "./utils/middelware";
+import { UserType } from "./utils/types";
 
-const app = new Hono()
+type ContextVariables = {
+    user: UserType | null;
+}
+
+const app = new Hono<{ Variables: ContextVariables }>()
 
 let projects = [
     {
@@ -60,15 +64,12 @@ app.use("/*", cors({
     })
 )
 
-app.get("/projects", (c) => {
-    const user = getUser(c.req.raw)
+app.get("/projects", authenticate(), (c) => {
+    const user = c.get("user")
 
     if (!user) throw new HTTPException(401)
     
-    const isPublic = true
-    const publicProjects = projects.filter((project) => {
-        project.isPublic === isPublic
-    })
+    const publicProjects = projects.filter((project) => project.isPublic === true)
     
     if (user.role === "admin") {
         return c.json({
