@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ProjectStatus, ProjectType } from '../Type';
+import { ProjectStatus, ProjectType } from '../utils/Type';
 
 type CreateProjectProps = {
   onAddProject: ( project: Omit<ProjectType, 'id'>) => void;
@@ -13,6 +13,7 @@ export default function CreateProject(props: CreateProjectProps) {
   const [categories, setCategories] = useState<string[]>([])
   const [publishedAt, setPublishedAt] = useState<string>('')
   const [status, setStatus] = useState<ProjectStatus | ''>('')
+  const [isPublic, setIsPublic] = useState<boolean>(false)
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,7 +27,8 @@ export default function CreateProject(props: CreateProjectProps) {
       description,
       categories,
       publishedAt: publishedAt || new Date().toISOString(),
-      status:status || ProjectStatus.NotStarted
+      status: status || ProjectStatus.NotStarted,
+      isPublic: isPublic || false
     }
 
     onAddProject(newProject)
@@ -68,6 +70,10 @@ export default function CreateProject(props: CreateProjectProps) {
           <option value={ProjectStatus.Ongoing}>Pågående</option>
           <option value={ProjectStatus.NotStarted}>Ikke startet</option>
         </select>
+
+        <label htmlFor='public'>Offentlig:</label>
+        <input type='checkbox' id='public' checked={isPublic} onChange={(e) => setIsPublic(e.target.checked)} />
+        
         <label htmlFor='date'>Dato:</label>
         <input type='date' id='date' value={publishedAt} onChange={handleDateChange} />
 

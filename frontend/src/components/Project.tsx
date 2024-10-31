@@ -1,5 +1,5 @@
 import { format } from "date-fns";
-import { ProjectType } from "../Type";
+import { ProjectType } from "../utils/Type";
 
 
 type ProjectProps = {

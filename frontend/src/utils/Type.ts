@@ -1,4 +1,4 @@
-// Type.ts
+// utils/Type.ts
 export enum ProjectStatus {
   Finished = "finished",
   Ongoing = "ongoing",
@@ -12,4 +12,5 @@ export type ProjectType = {
     categories?: string[];
     publishedAt: string;
     status: ProjectStatus;
+    isPublic: boolean;
 }

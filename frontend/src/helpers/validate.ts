@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { ProjectStatus } from '../Type';
+import { ProjectStatus } from '../utils/Type';
 
 export { projectSchema, projectsSchema }
 
@@ -11,7 +11,8 @@ const projectSchema = z.object({
   publishedAt: z.string().refine(val => !isNaN(Date.parse(val)), {
     message: "Ugyldig dato"
   }),
-  status: z.nativeEnum(ProjectStatus)
+  status: z.nativeEnum(ProjectStatus),
+  isPublic: z.boolean()
 });
 
 const projectsSchema = z.array(projectSchema);

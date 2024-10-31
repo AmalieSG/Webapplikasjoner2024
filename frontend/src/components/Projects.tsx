@@ -1,6 +1,6 @@
 import { ReactNode, useState } from "react";
 import Project from "./Project";
-import { ProjectType } from "../Type";
+import { ProjectType } from "../utils/Type";
 
 type ProjectsProps = {
     projects: ProjectType[];

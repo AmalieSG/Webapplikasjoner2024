@@ -1,6 +1,6 @@
 // hooks/useProjects.ts
 import { useState, useEffect } from 'react';
-import { ProjectType } from '../Type';
+import { ProjectType } from '../utils/Type';
 import { projectSchema } from '../helpers/validate';
 import { createProject, deleteProject, getProjects } from '../services/api';
 

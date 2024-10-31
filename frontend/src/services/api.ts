@@ -2,11 +2,14 @@
 import { ofetch } from 'ofetch';
 import { projectsSchema, projectSchema } from '../helpers/validate'; // Importer valideringsskjemaet
 import { API_URL } from '../config';
-import { ProjectType } from '../Type';
+import { ProjectType } from '../utils/Type';
 
 export const getProjects = async (): Promise<ProjectType[]> => {
   try {
-    const response = await ofetch(`${API_URL}`);
+    const response = await ofetch(`${API_URL}`, {
+      credentials: 'include'
+    });
+    
     const parsedProjects = projectsSchema.safeParse(response.data);
     const projectWithId: ProjectType[] = (parsedProjects.data || []).map(project => ({
       ...project,
@@ -46,3 +49,4 @@ export const deleteProject = async (id: string): Promise<void> => {
     throw new Error('Kunne ikke slette prosjekt');
   }
 };
+
