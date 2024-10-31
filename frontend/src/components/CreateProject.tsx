@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ProjectType } from '../Type';
+import { ProjectStatus, ProjectType } from '../Type';
 
 type CreateProjectProps = {
   onAddProject: ( project: Omit<ProjectType, 'id'>) => void;
@@ -11,11 +11,12 @@ export default function CreateProject(props: CreateProjectProps) {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [categories, setCategories] = useState<string[]>([])
-  const [date, setDate] = useState<string>('')
+  const [publishedAt, setPublishedAt] = useState<string>('')
+  const [status, setStatus] = useState<ProjectStatus | ''>('')
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!title || !description || categories.length === 0 || !date) {
+    if (!title || !description || categories.length === 0) {
       alert('Fyll inn alle feltene.');
       return;
     }
@@ -24,7 +25,8 @@ export default function CreateProject(props: CreateProjectProps) {
       title,
       description,
       categories,
-      date
+      publishedAt: publishedAt || new Date().toISOString(),
+      status:status || ProjectStatus.NotStarted
     }
 
     onAddProject(newProject)
@@ -32,7 +34,8 @@ export default function CreateProject(props: CreateProjectProps) {
     setTitle('')
     setDescription('')
     setCategories([])
-    setDate('')
+    setPublishedAt('')
+    setStatus('')
   }
 
   const handleCategoriesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,7 +45,7 @@ export default function CreateProject(props: CreateProjectProps) {
 
   const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value
-    setDate(value)
+    setPublishedAt(value)
   }
 
   return (
@@ -58,8 +61,15 @@ export default function CreateProject(props: CreateProjectProps) {
         <label htmlFor='categories'>Kategorier (separer med ","):</label>
         <input type='text' id='categories' value={categories.join(', ')} onChange={handleCategoriesChange} />
 
+        <label htmlFor='status'>Status:</label>
+        <select id='status' value={status} onChange={(e) => setStatus(e.target.value as ProjectStatus)}>
+          <option value=''>Velg status</option>
+          <option value={ProjectStatus.Finished}>Ferdig</option>
+          <option value={ProjectStatus.Ongoing}>Pågående</option>
+          <option value={ProjectStatus.NotStarted}>Ikke startet</option>
+        </select>
         <label htmlFor='date'>Dato:</label>
-        <input type='date' id='date' value={date} onChange={handleDateChange} />
+        <input type='date' id='date' value={publishedAt} onChange={handleDateChange} />
 
         <button type="submit">Legg til</button>
       </form>

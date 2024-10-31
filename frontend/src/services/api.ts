@@ -10,7 +10,7 @@ export const getProjects = async (): Promise<ProjectType[]> => {
     const parsedProjects = projectsSchema.safeParse(response.data);
     const projectWithId: ProjectType[] = (parsedProjects.data || []).map(project => ({
       ...project,
-      id: project.id || crypto.randomUUID(),
+      id: project.id || crypto.randomUUID()
     }))
     
     return projectWithId;
@@ -24,10 +24,7 @@ export const createProject = async (project: Omit<ProjectType, 'id'>): Promise<P
   try {
     const response = await ofetch(API_URL, {
       method: 'POST',
-      body: JSON.stringify(project),
-      headers: {
-        'Content-Type': 'application/json',
-      },      
+      body: JSON.stringify(project)  
     });
     
     const parsedProjects = projectSchema.safeParse(response);

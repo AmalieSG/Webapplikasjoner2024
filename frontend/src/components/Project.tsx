@@ -19,7 +19,8 @@ export default function Project(props: ProjectProps) {
       <h3>{project.title}</h3>
       <p>{project.description}</p>
       <p>{project.categories?.join(", ")}</p>
-      <p>Opprettet: {project.date ? format(new Date(project.date), "dd.MM.yyyy") : 'Ukjent dato'}</p>
+      <p>Status: {project.status}</p>
+      <p>Ferdig: {project.publishedAt ? format(new Date(project.publishedAt), "dd.MM.yyyy") : 'Ukjent dato'}</p>
         
       {showRemove ? (
         <button type="button" onClick={() => onRemoveProject(project.id)}>
