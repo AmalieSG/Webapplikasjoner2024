@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ProjectType } from './Type';
+import { ProjectType } from '../Type';
 
 type CreateProjectProps = {
   onAddProject: ( project: Omit<ProjectType, 'id'>) => void;
@@ -11,11 +11,11 @@ export default function CreateProject(props: CreateProjectProps) {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [categories, setCategories] = useState<string[]>([])
-  const [date, setDate] = useState(new Date())
+  const [date, setDate] = useState<string>('')
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!title || !description || !categories || !date) {
+    if (!title || !description || categories.length === 0 || !date) {
       alert('Fyll inn alle feltene.');
       return;
     }
@@ -32,17 +32,17 @@ export default function CreateProject(props: CreateProjectProps) {
     setTitle('')
     setDescription('')
     setCategories([])
-    setDate(new Date())
+    setDate('')
   }
 
   const handleCategoriesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value
-    setCategories(value.split(', ').map(category => category.trim()))
+    setCategories(value.split(', ').map((category) => category.trim()))
   }
 
   const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value
-    setDate(new Date(value))
+    setDate(value)
   }
 
   return (
@@ -55,14 +55,15 @@ export default function CreateProject(props: CreateProjectProps) {
         <label htmlFor='description'>Beskrivelse:</label>
         <textarea id='description' value={description} onChange={(e) => setDescription(e.target.value)} />
 
-        <label htmlFor='categories'>Kategorier:</label>
+        <label htmlFor='categories'>Kategorier (separer med ","):</label>
         <input type='text' id='categories' value={categories.join(', ')} onChange={handleCategoriesChange} />
 
         <label htmlFor='date'>Dato:</label>
-        <input type='date' id='date' value={date.toISOString().split('T')[0]} onChange={handleDateChange} />
+        <input type='date' id='date' value={date} onChange={handleDateChange} />
 
-        <button type="submit">Legg til prosjekt</button>
+        <button type="submit">Legg til</button>
       </form>
+      
   </section>
   );
 }

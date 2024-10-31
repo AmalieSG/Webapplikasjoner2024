@@ -1,4 +1,6 @@
-import { ProjectType } from "./Type";
+import { format } from "date-fns";
+import { ProjectType } from "../Type";
+
 
 type ProjectProps = {
   project: ProjectType;
@@ -15,14 +17,9 @@ export default function Project(props: ProjectProps) {
     <>
     <li className="project-card" key={project.id} onMouseOver={onMouseOver} onMouseLeave={onMouseLeave}>
       <h3>{project.title}</h3>
-      <p>Beskrivelse: {project.description}</p>
-      <p>Kategorier: {project.categories.join(", ")}</p>
-      <p>{new Date(project.date).toLocaleDateString('no-No', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-      })}
-      </p>
+      <p>{project.description}</p>
+      <p>{project.categories?.join(", ")}</p>
+      <p>Opprettet: {project.date ? format(new Date(project.date), "dd.MM.yyyy") : 'Ukjent dato'}</p>
         
       {showRemove ? (
         <button type="button" onClick={() => onRemoveProject(project.id)}>

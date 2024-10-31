@@ -52,10 +52,10 @@ app.get("/projects", (c) => {
 
 app.post("/projects", async (c) => {
     const body = await c.req.json()
+    console.log('Mottatt prosjekt:', body)
     const newProject = {
         id: crypto.randomUUID(),
         ...body,
-        date: new Date(body.date)
     }
     projects.push(newProject)
     return c.json(newProject)

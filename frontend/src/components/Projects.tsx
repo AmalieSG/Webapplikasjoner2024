@@ -1,6 +1,6 @@
 import { ReactNode, useState } from "react";
 import Project from "./Project";
-import { ProjectType } from "./Type";
+import { ProjectType } from "../Type";
 
 type ProjectsProps = {
     projects: ProjectType[];
@@ -24,6 +24,7 @@ type ProjectsProps = {
       const categoryTotals: { [key: string]: number } = {};
   
       projects.forEach((project) => {
+        if (project.categories && Array.isArray(project.categories)) {
         project.categories.forEach((category) => {
           if (categoryTotals[category]) {
             categoryTotals[category]++;
@@ -31,6 +32,7 @@ type ProjectsProps = {
             categoryTotals[category] = 1;
           }
         });
+      }
       });
   
       return categoryTotals;
@@ -56,7 +58,6 @@ type ProjectsProps = {
             ))}
           </ul>
         </div>
-
         <div className="project-list">
           <ul>
             {projects.map((project) => (
